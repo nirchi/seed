@@ -9,4 +9,4 @@ XDI mobile application starting template using:
 * AngularFire
 * Firebase
 
-- [XDInnovations](http://www.xdinnovations.com)
+Brought to you by: [XDInnovations](http://www.xdinnovations.com)
