@@ -1,6 +1,12 @@
-ionic-angular-cordova-seed
+xdi-seed
 ==========================
 
-The perfect starting point for an Ionic project.
+XDI mobile application starting template using:
 
-- [Ionic Tutorials](http://ionicframework.com/tutorials/)
+* Cordova
+* Ionic Framework
+* AngularJS
+* AngularFire
+* Firebase
+
+- [XDInnovations](http://www.xdinnovations.com)
