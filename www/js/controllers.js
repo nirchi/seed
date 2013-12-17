@@ -4,6 +4,7 @@ angular.module('xdiApp.controllers', [])
 
     .controller('LoginCtrl', ['$scope', 'loginService', function ($scope, loginService) {
         $scope.email = null;
+        $scope.username = null;
         $scope.pass = null;
         $scope.confirm = null;
         $scope.createMode = false;
@@ -20,6 +21,9 @@ angular.module('xdiApp.controllers', [])
             if (!$scope.email) {
                 $scope.err = 'Please enter an email address';
             }
+            else if (!$scope.username) {
+                $scope.err = 'Please enter a username';
+            }
             else if (!$scope.pass) {
                 $scope.err = 'Please enter a password';
             }
@@ -35,7 +39,7 @@ angular.module('xdiApp.controllers', [])
                         // must be logged in before I can write to my profile
                         $scope.login(function (err) {
                             if (!err) {
-                                loginService.createProfile(user.id, user.email);
+                                loginService.createProfile(user.id, user.email, $scope.username);
                             }
                         });
                     }
@@ -46,7 +50,7 @@ angular.module('xdiApp.controllers', [])
 
     .controller('AccountCtrl', ['$scope', 'loginService', 'angularFire', 'FBURL', '$timeout', function($scope, loginService, angularFire, FBURL, $timeout) {
 
-        angularFire(FBURL+'/users/'+$scope.auth.id, $scope, 'user', {});
+        angularFire(FBURL+'/user/'+$scope.auth.id, $scope, 'user', {});
 
         $scope.logout = function() {
             loginService.logout('/login');
