@@ -11,7 +11,7 @@ angular.module('xdiApp.controllers', [])
 
         $scope.login = function (callback) {
             $scope.err = null;
-            loginService.login($scope.email, $scope.pass, '/profile', function (err, user) {
+            loginService.login($scope.email, $scope.pass, '/map', function (err, user) {
                 $scope.err = err || null;
                 typeof(callback) === 'function' && callback(err, user);
             });
@@ -91,4 +91,62 @@ angular.module('xdiApp.controllers', [])
             }
         }
 
-    }]);
+    }])
+
+    .controller('MapCtrl', ['$scope', 'angularFire', 'FBURL', '$timeout', function($scope, angularFire, FBURL, $timeout) {
+
+        $scope.icons = {
+            gray: 'http://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_gray.png',
+            red: 'http://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_red.png'
+        }
+
+        $scope.options = {
+            map: {
+                center: new google.maps.LatLng(0, 0),
+                zoom: 3,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            },
+            highlighted: {
+                icon: $scope.icons.red
+            },
+            unhighlighted: {
+                icon: $scope.icons.gray
+            }
+        };
+
+        $scope.filters = {
+            name: null,
+            male: true,
+            female: true
+        }
+
+        $scope.getMarkerOptions = function(person) {
+            var opts = {title: person.name};
+            if (person.id in $scope.filteredPeople) {
+                return angular.extend(opts, $scope.options.highlighted);
+            } else {
+                return angular.extend(opts, $scope.options.unhighlighted);
+            }
+        };
+
+        $scope.filterPeople = function() {
+            $scope.filteredPeople = {};
+            angular.forEach($scope.people, function(person) {
+                var nameMatch = ($scope.filters.name) ? ~person.name.indexOf($scope.filters.name) : true;
+                var isMale = person.gender === 'male';
+                var genderMatch = ($scope.filters.male && isMale) ||
+                    ($scope.filters.female && !isMale);
+                if (nameMatch && genderMatch) {
+                    $scope.filteredPeople[person.id] = person;
+                }
+            });
+            $scope.$broadcast('gmMarkersRedraw', 'people');
+        };
+
+        $scope.$watch('people', function() {
+            $scope.filterPeople();
+        });
+
+        $scope.people = [{"id":1,"name":"Gianna Hodges","gender":"female","location":{"lat":4,"lng":21}},{"id":2,"name":"Isabella Davidson","gender":"female","location":{"lat":21,"lng":-11}},{"id":3,"name":"Aubrey Mercer","gender":"female","location":{"lat":-13,"lng":-22}}, {"id":4,"name":"David Nirchi","gender":"male","location":{"lat":10,"lng":21}}]
+
+}]);

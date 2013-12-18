@@ -5,7 +5,7 @@
 // the 2nd parameter is an array or 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('xdiApp', ['xdiApp.config', 'ionic', 'ngRoute', 'ngAnimate', 'xdiApp.services', 'xdiApp.controllers', 'firebase'])
+var app = angular.module('xdiApp', ['AngularGM', 'xdiApp.config', 'ionic', 'ngRoute', 'ngAnimate', 'xdiApp.services', 'xdiApp.controllers', 'firebase'])
 
     .config(function ($compileProvider) {
         // Needed for routing to work
@@ -30,6 +30,13 @@ angular.module('xdiApp', ['xdiApp.config', 'ionic', 'ngRoute', 'ngAnimate', 'xdi
             authRequired: false,
             templateUrl: 'partials/account/register.html',
             controller: 'LoginCtrl'
+        });
+
+        // Login
+        $routeProvider.when('/map', {
+            authRequired: true,
+            templateUrl: 'partials/home/map.html',
+            controller: 'MapCtrl'
         });
 
         // if none of the above routes are met, use this fallback
