@@ -7,12 +7,14 @@
 <nav-page ng-controller="MapCtrl" title="Home">
     <content has-header="true" padding="true">
         <gm-map
-                gm-map-id="'myMap'"
+                gm-map-id="'mapCanvas'"
                 gm-center="center"
                 gm-zoom="zoom"
                 gm-bounds="bounds"
                 gm-map-type-id="mapTypeId"
-                style="width:500px;height:500px;">
+                class="map"
+                gm-map-options="options.map"
+                style="width:500px;height:400px;">
 
                 <gm-markers
                     gm-objects="people"

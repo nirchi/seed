@@ -95,6 +95,16 @@ angular.module('xdiApp.controllers', [])
 
     .controller('MapCtrl', ['$scope', 'angularFire', 'FBURL', '$timeout', function($scope, angularFire, FBURL, $timeout) {
 
+        // Wait for device API libraries to load
+        //
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+        // device APIs are available
+        //
+        function onDeviceReady() {
+            navigator.geolocation.watchPosition(onSuccess, onError);
+        }
+
         $scope.icons = {
             gray: 'http://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_gray.png',
             red: 'http://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_red.png'
@@ -102,8 +112,8 @@ angular.module('xdiApp.controllers', [])
 
         $scope.options = {
             map: {
-                center: new google.maps.LatLng(0, 0),
-                zoom: 3,
+                center: $scope.center,
+                zoom: 14,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             },
             highlighted: {
@@ -114,11 +124,26 @@ angular.module('xdiApp.controllers', [])
             }
         };
 
+
         $scope.filters = {
             name: null,
             male: true,
             female: true
+        };
+
+        // onSuccess Geolocation
+        //
+        function onSuccess(position) {
+            $scope.center = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
         }
+
+        // onError Callback receives a PositionError object
+        //
+        function onError(error) {
+            alert('code: '    + error.code    + '\n' +
+                'message: ' + error.message + '\n');
+        }
+
 
         $scope.getMarkerOptions = function(person) {
             var opts = {title: person.name};
