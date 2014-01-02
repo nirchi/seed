@@ -102,7 +102,7 @@ angular.module('xdiApp.controllers', [])
         // device APIs are available
         //
         function onDeviceReady() {
-            navigator.geolocation.getCurrentPosition(onSuccess, onError);
+            navigator.geolocation.watchPosition(onSuccess, onError);
         }
 
         //navigator.geolocation.watchPosition(onSuccess, onError);
