@@ -105,7 +105,7 @@ angular.module('xdiApp.controllers', [])
             navigator.geolocation.watchPosition(onSuccess, onError);
         }
 
-        navigator.geolocation.watchPosition(onSuccess, onError);
+        //navigator.geolocation.watchPosition(onSuccess, onError);
 
         $scope.icons = {
             gray: 'http://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_gray.png',
