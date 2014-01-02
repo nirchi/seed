@@ -1,4 +1,4 @@
-<div class="bar bar-header bar-balanced">
+<div ng-controller="AccountCtrl" class="bar bar-header bar-balanced">
     <h1 class="title">Home</h1>
     <button ng-click="logout()" class="button button-royal">
         Logout
@@ -19,7 +19,8 @@
                 <gm-markers
                     gm-objects="people"
                     gm-get-lat-lng="{ lat: object.location.lat, lng: object.location.lng }"
-                    gm-get-marker-options="getMarkerOptions(object)">
+                    gm-get-marker-options="getMarkerOptions(object)"
+                    gm-on-click="infoWindow.open(marker.getMap(), marker);">
                 </gm-markers>
         </gm-map>
 
@@ -31,7 +32,7 @@
             <li class="item item-toggle">
                 Male
                 <label class="toggle">
-                    <input type="checkbox" ng-model="filters.male"   ng-change="filterPeople()">
+                    <input type="checkbox" ng-model="filters.male" ng-change="filterPeople()">
                     <div class="track">
                         <div class="handle"></div>
                     </div>

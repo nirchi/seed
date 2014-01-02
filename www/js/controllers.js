@@ -102,13 +102,15 @@ angular.module('xdiApp.controllers', [])
         // device APIs are available
         //
         function onDeviceReady() {
-            navigator.geolocation.getCurrentPosition(onSuccess, onError);
+            navigator.geolocation.watchPosition(onSuccess, onError);
         }
+
+        navigator.geolocation.watchPosition(onSuccess, onError);
 
         $scope.icons = {
             gray: 'http://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_gray.png',
             red: 'http://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_red.png'
-        }
+        };
 
         $scope.options = {
             map: {
@@ -124,7 +126,6 @@ angular.module('xdiApp.controllers', [])
             }
         };
 
-
         $scope.filters = {
             name: null,
             male: true,
@@ -135,6 +136,8 @@ angular.module('xdiApp.controllers', [])
         //
         function onSuccess(position) {
             $scope.center = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+            $scope.latitude = position.coords.latitude;
+            $scope.longitude = position.coords.longitude;
         }
 
         // onError Callback receives a PositionError object
@@ -143,7 +146,6 @@ angular.module('xdiApp.controllers', [])
             alert('code: '    + error.code    + '\n' +
                 'message: ' + error.message + '\n');
         }
-
 
         $scope.getMarkerOptions = function(person) {
             var opts = {title: person.name};
@@ -172,6 +174,6 @@ angular.module('xdiApp.controllers', [])
             $scope.filterPeople();
         });
 
-        $scope.people = [{"id":1,"name":"Gianna Hodges","gender":"female","location":{"lat":4,"lng":21}},{"id":2,"name":"Isabella Davidson","gender":"female","location":{"lat":21,"lng":-11}},{"id":3,"name":"Aubrey Mercer","gender":"female","location":{"lat":-13,"lng":-22}}, {"id":4,"name":"David Nirchi","gender":"male","location":{"lat":10,"lng":21}}]
+        $scope.people = [{"id":1, "name":"David Nirchi","gender":"male","location":{"lat":$scope.latitude,"lng":$scope.longitude}},{"id":2,"name":"Gianna Hodges","gender":"female","location":{"lat":4,"lng":21}},{"id":3,"name":"Isabella Davidson","gender":"female","location":{"lat":21,"lng":-11}},{"id":4,"name":"Aubrey Mercer","gender":"female","location":{"lat":-13,"lng":-22}}, {"id":5,"name":"Tim Lepple","gender":"male","location":{"lat":10,"lng":21}}];
 
 }]);
