@@ -136,8 +136,8 @@ angular.module('xdiApp.controllers', [])
         //
         function onSuccess(position) {
             $scope.center = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-            $scope.latitude = position.coords.latitude;
-            $scope.longitude = position.coords.longitude;
+
+            $scope.people.push({"id":1, "name":"You Are Here","gender":"male","location":{"lat":position.coords.latitude,"lng":position.coords.longitude}});
         }
 
         // onError Callback receives a PositionError object
@@ -174,6 +174,6 @@ angular.module('xdiApp.controllers', [])
             $scope.filterPeople();
         });
 
-        $scope.people = [{"id":1, "name":"David Nirchi","gender":"male","location":{"lat":$scope.latitude,"lng":$scope.longitude}},{"id":2,"name":"Gianna Hodges","gender":"female","location":{"lat":4,"lng":21}},{"id":3,"name":"Isabella Davidson","gender":"female","location":{"lat":21,"lng":-11}},{"id":4,"name":"Aubrey Mercer","gender":"female","location":{"lat":-13,"lng":-22}}, {"id":5,"name":"Tim Lepple","gender":"male","location":{"lat":10,"lng":21}}];
+        $scope.people = [{"id":2,"name":"Gianna Hodges","gender":"female","location":{"lat":4,"lng":21}},{"id":3,"name":"Isabella Davidson","gender":"female","location":{"lat":21,"lng":-11}},{"id":4,"name":"Aubrey Mercer","gender":"female","location":{"lat":-13,"lng":-22}}, {"id":5,"name":"Tim Lepple","gender":"male","location":{"lat":10,"lng":21}}];
 
 }]);
