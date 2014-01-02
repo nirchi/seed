@@ -5,7 +5,7 @@
 // the 2nd parameter is an array or 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-var app = angular.module('xdiApp', ['AngularGM', 'xdiApp.config', 'ionic', 'ngRoute', 'ngAnimate', 'xdiApp.services', 'xdiApp.controllers', 'firebase'])
+var app = angular.module('xdiApp', ['AngularGM', 'xdiApp.config', 'ionic', 'ngTouch', 'ngRoute', 'ngAnimate', 'xdiApp.services', 'xdiApp.controllers', 'firebase'])
 
     .config(function ($compileProvider) {
         // Needed for routing to work
