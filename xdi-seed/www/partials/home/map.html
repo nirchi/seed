@@ -1,0 +1,59 @@
+<div class="bar bar-header bar-balanced">
+    <h1 class="title">Home</h1>
+    <button ng-click="logout()" class="button button-royal">
+        Logout
+    </button>
+</div>
+<nav-page ng-controller="MapCtrl" title="Home">
+    <content has-header="true" padding="true">
+        <gm-map
+                gm-map-id="'myMap'"
+                gm-center="center"
+                gm-zoom="zoom"
+                gm-bounds="bounds"
+                gm-map-type-id="mapTypeId"
+                style="width:500px;height:500px;">
+
+                <gm-markers
+                    gm-objects="people"
+                    gm-get-lat-lng="{ lat: object.location.lat, lng: object.location.lng }"
+                    gm-get-marker-options="getMarkerOptions(object)">
+                </gm-markers>
+        </gm-map>
+
+        <label class="item item-input">
+            <input type="text" ng-model="filters.name" ng-change="filterPeople()" placeholder="Search for a specific person">
+        </label>
+
+        <ul class="list">
+            <li class="item item-toggle">
+                Male
+                <label class="toggle">
+                    <input type="checkbox" ng-model="filters.male"   ng-change="filterPeople()">
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+            </li>
+            <li class="item item-toggle">
+                Female
+                <label class="toggle">
+                    <input type="checkbox" ng-model="filters.female" ng-change="filterPeople()">
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+            </li>
+        </ul>
+
+
+        <!--<label class="inline">Name: </label><input class="inline" ng-model="filters.name" ng-change="filterPeople()"> <br /><br />-->
+        <!--<input type="checkbox" ng-model="filters.male"   ng-change="filterPeople()"> Male <br />-->
+        <!--<input type="checkbox" ng-model="filters.female" ng-change="filterPeople()"> Female-->
+        <div class="well person-list">
+            <!--<li ng-repeat="(id, person) in filteredPeople">-->
+                <!--{{person.name}}, {{person.gender}}-->
+            <!--</li>-->
+        </div>
+    </content>
+</nav-page>
