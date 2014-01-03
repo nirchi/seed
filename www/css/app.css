@@ -10,3 +10,15 @@
   left: 50%;
   margin: -64px 0px 0px -64px;
 }
+
+.map {
+    height: 300px;
+}
+
+/*
+Fixes Bootstrap issues with Google Maps
+see http://stackoverflow.com/a/9170756
+*/
+.map img {
+    max-width: none;
+}

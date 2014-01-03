@@ -1,29 +1,27 @@
-<div ng-controller="AccountCtrl" class="bar bar-header bar-balanced">
+<header ng-controller="AccountCtrl" class="bar bar-header bar-balanced">
     <h1 class="title">Home</h1>
     <button ng-click="logout()" class="button button-royal">
         Logout
     </button>
-</div>
+</header>
 <nav-page ng-controller="MapCtrl" title="Home">
-    <content has-header="true" padding="true">
-        <gm-map
-                gm-map-id="'mapCanvas'"
-                gm-center="center"
-                gm-zoom="zoom"
-                gm-bounds="bounds"
-                gm-map-type-id="mapTypeId"
-                class="map"
-                gm-map-options="options.map"
-                style="width:375px;height:300px;">
+    <content has-header="true" padding="false">
+            <gm-map
+                    gm-map-id="'mapCanvas'"
+                    gm-center="center"
+                    gm-zoom="zoom"
+                    gm-bounds="bounds"
+                    gm-map-type-id="mapTypeId"
+                    class="map"
+                    gm-map-options="options.map">
 
-                <gm-markers
-                    gm-objects="people"
-                    gm-get-lat-lng="{ lat: object.location.lat, lng: object.location.lng }"
-                    gm-get-marker-options="getMarkerOptions(object)"
-                    gm-on-click="infoWindow.open(marker.getMap(), marker);">
-                </gm-markers>
-        </gm-map>
-
+                    <gm-markers
+                        gm-objects="people"
+                        gm-get-lat-lng="{ lat: object.location.lat, lng: object.location.lng }"
+                        gm-get-marker-options="getMarkerOptions(object)"
+                        gm-on-click="infoWindow.open(marker.getMap(), marker);">
+                    </gm-markers>
+            </gm-map>
         <label class="item item-input">
             <input type="text" ng-model="filters.name" ng-change="filterPeople()" placeholder="Search for a specific person">
         </label>
