@@ -63,6 +63,10 @@ app.config(['$routeProvider', function ($routeProvider) {
     });
 }]);
 
+function errMsg(err) {
+    return err ? '[' + err.code + '] ' + err.toString() : null;
+}
+
 // establish authentication
 app.run(['angularFireAuth', 'FBURL', '$rootScope', function (angularFireAuth, FBURL, $rootScope) {
     angularFireAuth.initialize(FBURL, {scope: $rootScope, name: "auth", path: '/login'});
