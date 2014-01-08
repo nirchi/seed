@@ -25,6 +25,10 @@
 
     </pane>
 
+    <!-- Comment out the following 2 lines to test on the browser-->
+    <!--<script type="text/javascript" src="lib/cordova/cordova.js"></script>-->
+    <!--<script type="text/javascript" src="js/index.js"></script>-->
+
     <!-- ionic/angularjs scripts -->
     <script src="lib/ionic/ionic.js"></script>
     <!--<script src="lib/angular/angular.js"></script>-->
@@ -39,17 +43,27 @@
     <script src="lib/angular/angular-sanitize.js"></script>
     <script src="lib/ionic/ionic-angular.js"></script>
     <script src="http://maps.googleapis.com/maps/api/js?sensor=false&language=en"></script>
-    <script src="http://angulargm.herokuapp.com/angular-gm-0.3.1.min.js"></script>
 
-    <!-- Comment out the following 2 lines to test on the browser-->
-    <!--<script type="text/javascript" src="lib/cordova/cordova.js"></script>-->
-    <!--<script type="text/javascript" src="js/index.js"></script>-->
-
-    <!-- your app's script -->
-    <script src="js/config.js"></script>
+    <!-- Main Application -->
     <script src="js/app.js"></script>
-    <script src="js/services.js"></script>
-    <script src="js/controllers.js"></script>
+    <script src="js/config.js"></script>
+
+    <!-- Controllers -->
+    <script src="js/controllers/AccountCtrl.js"></script>
+    <script src="js/controllers/LoginCtrl.js"></script>
+    <script src="js/controllers/MapCtrl.js"></script>
+
+    <!-- Services -->
+    <script src="js/services/geoLocationService.js"></script>
+    <script src="js/services/loginService.js"></script>
+    <script src="js/services/phoneGapReadyService.js"></script>
+    <script src="js/services/registerService.js"></script>
+
+    <!-- Directives -->
+    <script src="js/directives/appVersionDirective.js"></script>
+
+    <!-- Filters -->
+    <script src="js/filters/interpolateFilter.js"></script>
 
   </body>
 </html>

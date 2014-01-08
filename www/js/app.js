@@ -1,63 +1,70 @@
 'use strict';
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array or 'requires'
-// 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
-var app = angular.module('xdiApp', ['ionic.ui.content', 'ionic.ui.list', 'ionic.service.loading', 'AngularGM', 'xdiApp.config', 'ionic', 'ngTouch', 'ngRoute', 'ngAnimate', 'xdiApp.services', 'xdiApp.controllers', 'firebase'])
+var app = angular.module('xdiApp', ['xdiApp.config', 'xdiApp.services', 'xdiApp.controllers', 'xdiApp.directives', 'xdiApp.filters', 'ionic', 'ngTouch', 'ngRoute', 'ngAnimate', 'firebase'])
 
-    .config(function ($compileProvider) {
-        // Needed for routing to work
-        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
-    })
+// Initialize all the application dependencies (config, services, controllers, etc.)
 
-    .config(['$routeProvider', function($routeProvider) {
+// AppConfig Module Initialization
+// Note: The application configuration module can be found in js\config.js.
+var appConfig = angular.module('xdiApp.config', []);
 
-        // Login
-        $routeProvider.when('/login', {
-            templateUrl: 'partials/account/login.html',
-            controller: 'LoginCtrl'
-        });
+// Services Module Initialization
+// Note: Individual services can be found in js\services.
+var appServices = angular.module('xdiApp.services', []);
 
-        $routeProvider.when('/profile', {
-            authRequired: true,
-            templateUrl: 'partials/account/profile.html',
-            controller: 'AccountCtrl'
-        });
+// Controllers Module Initialization */
+// Note: Individual controllers can be found in js\controllers.
+var appControllers = angular.module('xdiApp.controllers', []);
 
-        $routeProvider.when('/register', {
-            authRequired: false,
-            templateUrl: 'partials/account/register.html',
-            controller: 'LoginCtrl'
-        });
+// Directives Module Initialization
+// Note: Individual directives can be found in js\directives.
+var appDirectives = angular.module('xdiApp.directives', []);
 
-        // Login
-        $routeProvider.when('/map', {
-            authRequired: true,
-            templateUrl: 'partials/home/map.html',
-            controller: 'MapCtrl'
-        });
+// Filters Module Initialization
+// Note: Individual filters can be found in js\filters.
+var appFilters = angular.module('xdiApp.filters', []);
 
-        // if none of the above routes are met, use this fallback
-        // which executes the 'AppCtrl' controller (controllers.js)
-        $routeProvider.otherwise({
-            redirectTo: '/login'
-        });
+app.config(function ($compileProvider) {
+    // Needed for routing to work
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
+});
 
-    }])
+app.config(['$routeProvider', function ($routeProvider) {
 
-    // double-check that the app has been configured
-    /*.run(['FBURL', function (FBURL) {
-        if (FBURL === 'https://xdi.firebaseio.com') {
-            angular.element(document.body).html('<h1>Please configure app/js/config.js before running!</h1>');
-        }
-    }])
-    */
+    // Login
+    $routeProvider.when('/login', {
+        templateUrl: 'partials/account/login.html',
+        controller: 'LoginCtrl'
+    });
 
-    // establish authentication
-    .run(['angularFireAuth', 'FBURL', '$rootScope', function (angularFireAuth, FBURL, $rootScope) {
-        angularFireAuth.initialize(FBURL, {scope: $rootScope, name: "auth", path: '/login'});
-        $rootScope.FBURL = FBURL;
-    }]);
+    $routeProvider.when('/profile', {
+        authRequired: true,
+        templateUrl: 'partials/account/profile.html',
+        controller: 'AccountCtrl'
+    });
 
+    $routeProvider.when('/register', {
+        authRequired: false,
+        templateUrl: 'partials/account/register.html',
+        controller: 'LoginCtrl'
+    });
+
+    // Login
+    $routeProvider.when('/map', {
+        authRequired: true,
+        templateUrl: 'partials/home/map.html',
+        controller: 'MapCtrl'
+    });
+
+    // if none of the above routes are met, use this fallback
+    // which executes the 'AppCtrl' controller (AccountCtrl.js)
+    $routeProvider.otherwise({
+        redirectTo: '/login'
+    });
+}]);
+
+// establish authentication
+app.run(['angularFireAuth', 'FBURL', '$rootScope', function (angularFireAuth, FBURL, $rootScope) {
+    angularFireAuth.initialize(FBURL, {scope: $rootScope, name: "auth", path: '/login'});
+    $rootScope.FBURL = FBURL;
+}]);

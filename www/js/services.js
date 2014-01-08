@@ -117,7 +117,7 @@
             };
         })
 
-        .factory('geolocation', function ($rootScope, phonegapReady) {
+        .factory('geoLocationService', function ($rootScope, phonegapReady) {
             return {
                 getCurrentPosition: function (onSuccess, onError, options) {
                     navigator.geolocation.getCurrentPosition(function () {
@@ -142,7 +142,30 @@
                         options);
                 }
             };
+        })
+
+        .service('geocoder', function() {
+
+            this.getGeo = function(params, callback) {
+
+                var geocoder = new google.maps.Geocoder();
+
+                geocoder.geocode(params, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK && results[0]) {
+                        return callback({
+                            address: results[0].formatted_address
+                            , latlng: [results[0].geometry.location.lat(), results[0].geometry.location.lng()]
+                        });
+
+                    } else {
+                        callback(false);
+                    }
+                });
+
+            };
         });
+
+
 
     function errMsg(err) {
         return err ? '[' + err.code + '] ' + err.toString() : null;
