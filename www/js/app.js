@@ -1,6 +1,8 @@
 'use strict';
 
-var app = angular.module('xdiApp', ['xdiApp.config', 'xdiApp.services', 'xdiApp.controllers', 'xdiApp.directives', 'xdiApp.filters', 'ionic', 'ngTouch', 'ngRoute', 'ngAnimate', 'firebase'])
+var app = angular.module('xdiApp', ['xdiApp.config', 'xdiApp.services', 'xdiApp.controllers', 'xdiApp.directives',
+    'xdiApp.filters', 'ionic', 'ionic.ui.content', 'ionic.ui.list', 'ionic.service.loading', 'ngTouch', 'ngRoute',
+    'ngAnimate', 'firebase']);
 
 // Initialize all the application dependencies (config, services, controllers, etc.)
 
