@@ -4,11 +4,59 @@ appControllers
 
     .controller('MapCtrl', function ($scope) {
 
-        $scope.map = {
-            center: {
-                latitude: 45,
-                longitude: -73
-            },
-            zoom: 8
-        };
+        function initialize() {
+
+            if ("geolocation" in navigator) {
+                /* geolocation is available */
+                var wpid = navigator.geolocation.watchPosition(geo_success, geo_error, geo_options);
+            } else {
+                /* geolocation IS NOT available */
+                $scope.error = "Geolocation is not available";
+            }
+
+            $scope.map = {
+                center: {
+                    latitude: 0,
+                    longitude: 0
+                },
+                zoom: 10,
+                marker: {
+                    coords: {
+                        latitude: 0,
+                        longitude: 0
+                    }
+                }
+            };
+
+            function geo_success(position) {
+                $scope.latitude  = position.coords.latitude;
+                $scope.longitude = position.coords.longitude;
+
+                $scope.map.center = {latitude: $scope.latitude, longitude: $scope.longitude};
+                $scope.currentLocationMarker = {
+                    coords: {
+                        latitude: $scope.latitude,
+                        longitude: $scope.longitude}
+                };
+            }
+
+            function geo_error() {
+                alert("Sorry, no position available.");
+            }
+
+            var geo_options = {
+                enableHighAccuracy: true,
+                maximumAge        : 30000,
+                timeout           : 27000
+            };
+        }
+
+        initialize();
+
+        $scope.currentLocationMarker = {
+            coords: {
+                latitude: 30,
+                longitude: 30
+            }
+        }
     });

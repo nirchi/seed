@@ -6,7 +6,14 @@
 </header>
 <nav-page ng-controller="MapCtrl" title="Home">
     <content has-header="true">
-        <google-map center='map.center' draggable='true' zoom='map.zoom'></google-map>
+        <google-map
+                center="map.center"
+                zoom="map.zoom">
+            <marker coords="currentLocationMarker.coords"></marker>
+        </google-map>
+        <!--<markers models="map.randomMarkers" coords="'self'" icon="'icon'" click="'onClicked'"-->
+                 <!--doCluster="map.doClusterRandomMarkers" clusterOptions="map.clusterOptions">-->
+        <!--</markers>-->
     </content>
     <div class="bar bar-footer bar-balanced">
         <h1 class="title">Footer Content Goes Here</h1>
