@@ -14,6 +14,7 @@ appControllers
                 $scope.error = "Geolocation is not available";
             }
 
+            // Initialize the map.
             $scope.map = {
                 center: {
                     latitude: 0,
@@ -28,6 +29,14 @@ appControllers
                 }
             };
 
+            // Initialize the current location marker.
+            $scope.currentLocationMarker = {
+                coords: {
+                    latitude: 0,
+                    longitude: 0
+                }
+            };
+
             function geo_success(position) {
                 $scope.latitude  = position.coords.latitude;
                 $scope.longitude = position.coords.longitude;
@@ -36,7 +45,10 @@ appControllers
                 $scope.currentLocationMarker = {
                     coords: {
                         latitude: $scope.latitude,
-                        longitude: $scope.longitude}
+                        longitude: $scope.longitude},
+                    options: {
+                        animation: google.maps.Animation.DROP
+                    }
                 };
             }
 
@@ -53,10 +65,4 @@ appControllers
 
         initialize();
 
-        $scope.currentLocationMarker = {
-            coords: {
-                latitude: 30,
-                longitude: 30
-            }
-        }
     });
