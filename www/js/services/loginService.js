@@ -2,8 +2,8 @@
 
 appServices
 
-    .factory('loginService', ['angularFireAuth', 'registerService', '$location', '$rootScope',
-        function (angularFireAuth, registerService, $location, $rootScope) {
+    .factory('loginService', ['angularFireAuth', 'registerService', 'userService', '$location', '$rootScope',
+        function (angularFireAuth, registerService, userService, $location, $rootScope) {
             return {
                 /**
                  * @param {string} email
@@ -20,6 +20,34 @@ appServices
                     });
 
                     p.then(function (user) {
+                        console.log('Logged In', $rootScope);
+                        // Store the auth token
+                        localStorage.setItem('token', user.firebaseAuthToken);
+
+                        userService.setUser(user);
+
+                        userService.getn
+
+                        //$rootScope.isLoggedIn = true;
+
+                        //$rootScope.userId = user.id;
+
+                        // Set the userRef and add user child refs once
+                        //$rootScope.userRef = fireFactory.firebaseRef('users').child(user.id);
+//                        $rootScope.userRef.once('value', function(data) {
+//                            // Set the userRef children if this is first login
+//                            var val = data.val();
+//                            var info = {
+//                                userId: user.id,
+//                                name: user.name
+//                            };
+//                            // Use snapshot value if not first login
+//                            if (val) {
+//                                info = val;
+//                            }
+//                            $rootScope.userRef.set(info); // set user child data once
+//                        });
+
                         if (redirect) {
                             $location.path(redirect);
                         }

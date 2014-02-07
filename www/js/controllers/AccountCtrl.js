@@ -2,11 +2,14 @@
 
 appControllers
 
-.controller('AccountCtrl', ['$scope', 'loginService', 'angularFire', 'FBURL', '$timeout', function($scope, loginService, angularFire, FBURL, $timeout) {
+.controller('AccountCtrl', ['$scope', 'loginService', 'userService', 'angularFire', 'FBURL', '$timeout', function($scope, loginService, userService, angularFire, FBURL, $timeout) {
 
     angularFire(FBURL+'/user/'+$scope.auth.id, $scope, 'user', {});
 
     $scope.logout = function() {
+        var watchId = userService.getWatchId();
+        navigator.geolocation.clearWatch(watchId);
+
         loginService.logout('/login');
     };
 
